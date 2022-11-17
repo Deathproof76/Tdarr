@@ -1,4 +1,4 @@
-FROM lsiobase/ubuntu:focal
+FROM lsiobase/ubuntu:jammy
 
 ARG VERSION
 ARG MODULE
@@ -30,11 +30,11 @@ RUN apt-get update &&  \
     
     apt-get update && apt-get install -y curl unzip mkvtoolnix libtesseract-dev && \
     if uname -m | grep -q x86; then \    
-        # FFmpeg
+        # FFmpeg 5
         apt install -y wget && \
-        wget https://repo.jellyfin.org/releases/server/ubuntu/versions/jellyfin-ffmpeg/4.3.2-1/jellyfin-ffmpeg_4.3.2-1-focal_amd64.deb && \
+        wget https://repo.jellyfin.org/releases/server/ubuntu/versions/jellyfin-ffmpeg/5.1.2-4/jellyfin-ffmpeg5_5.1.2-4-jammy_amd64.deb && \
         apt install -y \
-        ./jellyfin-ffmpeg_4.3.2-1-focal_amd64.deb && \
+        ./jellyfin-ffmpeg5_5.1.2-4-jammy_amd64.deb && \
         ln -s /usr/lib/jellyfin-ffmpeg/ffmpeg /usr/local/bin/ffmpeg && \
         ln -s /usr/lib/jellyfin-ffmpeg/ffmpeg /usr/local/bin/tdarr-ffmpeg && \
         # apt-get install -y ffmpeg && \
@@ -47,6 +47,11 @@ RUN apt-get update &&  \
             intel-media-va-driver-non-free \
             vainfo \
             mesa-va-drivers && \
+
+        # oibaf deps
+        add-apt-repository ppa:oibaf/graphics-drivers -y\
+        apt-get update && \
+        apt-get upgrade -y \
 
         # HandBrake deps
         apt-get install -y \
