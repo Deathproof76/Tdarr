@@ -2,7 +2,11 @@ version: "3.4"
 services:
   tdarr:
     container_name: deathprooftdarr
-    build: .
+    build: 
+      context: ./
+      dockerfile: Dockerfile
+      args: 
+         MODULE: Tdarr_Server
     restart: unless-stopped
     privileged: true
     devices:
