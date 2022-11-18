@@ -30,7 +30,7 @@ RUN apt-get update &&  \
     
     apt-get update && apt-get install -y curl unzip mkvtoolnix libtesseract-dev && \
     if uname -m | grep -q x86; then \    
-        # FFmpeg 5
+        # FFmpeg
         apt install -y wget && \
         wget https://repo.jellyfin.org/releases/server/ubuntu/versions/jellyfin-ffmpeg/5.1.2-4/jellyfin-ffmpeg5_5.1.2-4-jammy_amd64.deb && \
         apt install -y \
@@ -46,12 +46,29 @@ RUN apt-get update &&  \
         apt-get install -y --no-install-recommends \
             intel-media-va-driver-non-free \
             vainfo \
-            mesa-va-drivers && \
-
-        # oibaf deps
-        add-apt-repository ppa:oibaf/graphics-drivers -y\
-        apt-get update && \
-        apt-get upgrade -y \
+            mesa-va-drivers \
+            intel-opencl-icd \
+            intel-level-zero-gpu \
+            level-zero \
+            intel-media-va-driver-non-free \
+            libmfx1 \
+            libmfxgen1 \
+            libvpl2 \
+            libegl-mesa0 \
+            libegl1-mesa \    
+            libegl1-mesa-dev \
+            libgbm1 \
+            libgl1-mesa-dev \
+            libgl1-mesa-dri \
+            libglapi-mesa \
+            libgles2-mesa-dev \
+            libglx-mesa0 \
+            libigdgmm12 \
+            libxatracker2 \
+            mesa-va-drivers \
+            mesa-vdpau-drivers \
+            mesa-vulkan-drivers \
+            va-driver-all && \
 
         # HandBrake deps
         apt-get install -y \
@@ -91,7 +108,7 @@ RUN apt-get update &&  \
             ninja-build \
             patch \
             pkg-config \
-            python \
+            python3 \
             tar \
             zlib1g-dev \
             libva-dev \
